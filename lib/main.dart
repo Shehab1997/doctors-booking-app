@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+/*import "package:flutter/material.dart";
 
 void main() {
   runApp(App());
@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
+                    gradient: LinearGradient(colors:[Colors.greenAccent,Colors.blueAccent] ),
                       border: Border.all(color: Colors.amber),
                       borderRadius: BorderRadius.circular(15.0)),
                   margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -73,5 +74,29 @@ class _HomePageState extends State<HomePage> {
                 );
               }),
         ));
+  }
+}
+ */
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_app_itshare/home.dart';
+import 'package:flutter_app_itshare/profile.dart';
+
+main() {
+  runApp(Myapp());
+}
+
+class Myapp extends StatefulWidget {
+  @override
+  _MyappState createState() => _MyappState();
+}
+
+class _MyappState extends State<Myapp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
