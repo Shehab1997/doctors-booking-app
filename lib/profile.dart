@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.pop(context);
                     }),
                 ListTile(
-                  contentPadding: EdgeInsets.all(30),
+                  contentPadding: EdgeInsets.all(20),
                   leading: CircleAvatar(
                     minRadius: 35,
                     maxRadius: 35,
