@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_itshare/Screens/home.dart';
+import 'package:flutter_app_itshare/Widgets/customappbar.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
-
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
@@ -14,30 +15,12 @@ class _ProfilePageState extends State<ProfilePage> {
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height / 4,
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15.5),
-                    bottomRight: Radius.circular(15.5)),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.cyanAccent, Colors.blueAccent],
-                )),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                    icon: Icon(Icons.close_rounded),
-                    iconSize: 40,
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-                ListTile(
+          CustomAppBar(
+              MediaQuery.of(context).size.height / 4,
+              '',
+              Container(
+
+                child: ListTile(
                   contentPadding: EdgeInsets.all(20),
                   leading: CircleAvatar(
                     minRadius: 35,
@@ -59,9 +42,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontSize: 15),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+              Icons.close_rounded),
           Container(
             margin: EdgeInsets.all(10),
             child: ListTile(

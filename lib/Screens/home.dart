@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_itshare/profile.dart';
+import 'package:flutter_app_itshare/Screens/profile.dart';
+import 'package:flutter_app_itshare/Screens/appointment.dart';
+import 'package:flutter_app_itshare/Widgets/customappbar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -52,45 +54,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
-      body: Container(
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              height: MediaQuery.of(context).size.height / 4,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.cyanAccent, Colors.blueAccent]),
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(15.5),
-                      bottomLeft: Radius.circular(15.5))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      icon: Icon(
-                        Icons.sort,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
-                      }),
-                  Text(
-                    'Cairo, Egypt\n search for doctors near you',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.normal),
-                  ),
+        backgroundColor: Colors.grey[50],
+        body: Container(
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: [
+              CustomAppBar(
+                  MediaQuery.of(context).size.height / 4,
+                  'Cairo, Egypt\n search for doctors near you',
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.5),
@@ -110,44 +81,41 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            Container(
-                height: MediaQuery.of(context).size.height / 5.5,
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Color(0xffedf7f8),
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/doctorhome.jpg'),
-                        alignment: Alignment.centerRight),
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  '  Schedule your next\n  Doctor appointments\n  Today!',
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff03CBC8)),
-                )),
-            headline('Categories'),
-            Container(
-                margin: EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height / 4.10,
-                child: scrollSection(categories)),
-            headline('Today Offers'),
-            Container(
-                margin: EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height / 4.10,
-                child: scrollSection(offers)),
-            headline('Suggested Doctors'),
-            doctorSuggestions('Shehab Ahmed', 'Dental'),
-            doctorSuggestions('Basel Allam', 'Kids'),
-            doctorSuggestions('Mohamed Ahmed', 'Cardiologist')
-          ],
-        ),
-      ),
-    );
+                  Icons.sort),
+              Container(
+                  height: MediaQuery.of(context).size.height / 5.5,
+                  alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Color(0xffedf7f8),
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/doctorhome.jpg'),
+                          alignment: Alignment.centerRight),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    '  Schedule your next\n  Doctor appointments\n  Today!',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff03CBC8)),
+                  )),
+              headline('Categories'),
+              Container(
+                  margin: EdgeInsets.all(10),
+                  height: MediaQuery.of(context).size.height / 4.10,
+                  child: scrollSection(categories)),
+              headline('Today Offers'),
+              Container(
+                  margin: EdgeInsets.all(10),
+                  height: MediaQuery.of(context).size.height / 4.10,
+                  child: scrollSection(offers)),
+              headline('Suggested Doctors'),
+              doctorSuggestions('Shehab Ahmed', 'Dental'),
+              doctorSuggestions('Basel Allam', 'Kids'),
+              doctorSuggestions('Mohamed Ahmed', 'Cardiologist')
+            ],
+          ),
+        ));
   }
 
   headline(String title) {
