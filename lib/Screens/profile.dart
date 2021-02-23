@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_itshare/Screens/bottomnavbar.dart';
 import 'package:flutter_app_itshare/Screens/home.dart';
 import 'package:flutter_app_itshare/Widgets/customappbar.dart';
 
@@ -7,6 +8,7 @@ class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
+
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
@@ -19,8 +21,13 @@ class _ProfilePageState extends State<ProfilePage> {
               MediaQuery.of(context).size.height / 4,
               '',
               Container(
-
                 child: ListTile(
+                  onTap: () {
+                    return Navigator.push(context,
+                        MaterialPageRoute(builder: (_) {
+                      return BottomNavBar();
+                    }));
+                  },
                   contentPadding: EdgeInsets.all(20),
                   leading: CircleAvatar(
                     minRadius: 35,

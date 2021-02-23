@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_itshare/Screens/browse.dart';
 import 'package:flutter_app_itshare/Screens/profile.dart';
 import 'package:flutter_app_itshare/Screens/appointment.dart';
 import 'package:flutter_app_itshare/Widgets/customappbar.dart';
@@ -120,6 +121,15 @@ class _HomePageState extends State<HomePage> {
 
   headline(String title) {
     return ListTile(
+      onTap: () {
+        return Navigator.push(context, MaterialPageRoute(builder: (_) {
+          return (title == 'Categories'
+              ? Browse()
+              : Container(
+                  color: Colors.amber,
+                ));
+        }));
+      },
       title: Text(title,
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),

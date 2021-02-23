@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_itshare/Screens/browse.dart';
 import 'package:flutter_app_itshare/Widgets/customappbar.dart';
 
 class Appointments extends StatefulWidget {
@@ -14,10 +15,10 @@ class _AppointmentsState extends State<Appointments> {
       child: Scaffold(
         backgroundColor: Colors.grey[50],
         appBar: AppBar(
-          backgroundColor: Color(0xff00BBDC),
+          backgroundColor: Colors.transparent,
           elevation: 0,
           bottom: PreferredSize(
-              preferredSize: Size(0, 90),
+              preferredSize: Size(0, 102),
               child: CustomAppBar(
                   MediaQuery.of(context).size.height / 5.5,
                   'Manage Your Appointment',
@@ -34,8 +35,8 @@ class _AppointmentsState extends State<Appointments> {
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold),
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),border: Border.all(width: 1,color: Colors.white)
-                    ),
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(width: 1, color: Colors.white)),
                   ),
                   Icons.sort)),
         ),

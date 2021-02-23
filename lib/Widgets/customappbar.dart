@@ -6,8 +6,9 @@ class CustomAppBar extends StatefulWidget {
   final double height;
   final String text;
   final Widget secondPart;
-final IconData iconz;
-  CustomAppBar(this.height, this.text, this.secondPart,this.iconz);
+  final IconData iconz;
+
+  CustomAppBar(this.height, this.text, this.secondPart, this.iconz);
 
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
@@ -32,10 +33,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Icon(
-                  widget.iconz,
-                  color: Colors.white,
-                  size: 35,
-                ),
+            widget.iconz,
+            color: Colors.white,
+            size: 35,
+          ),
           Text(
             widget.text,
             style: TextStyle(

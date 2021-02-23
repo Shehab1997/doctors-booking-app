@@ -11,7 +11,8 @@ class _BrowseState extends State<Browse> {
     0: [Icons.filter_list_sharp, 'Filter'],
     1: [Icons.keyboard_arrow_down_rounded, 'Gender'],
     2: [Icons.keyboard_arrow_down_rounded, 'Distance'],
-    3: [Icons.keyboard_arrow_down_rounded, 'Filter']
+    3: [Icons.keyboard_arrow_down_rounded, 'Name'],
+    4: [Icons.keyboard_arrow_down_rounded, 'City']
   };
   Map<int, List> drs = {
     0: [
@@ -36,33 +37,28 @@ class _BrowseState extends State<Browse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_rounded, size: 35, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Browse',
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 24,
+                fontWeight: FontWeight.w500)),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: Colors.grey[90],
       body: Container(
+        height: double.infinity,
         padding: EdgeInsets.all(10),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.arrow_back_rounded, size: 35, color: Colors.black),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 3,
-                ),
-                Text('Browse',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500))
-              ],
-            ),
-            filter(filters),
-            Container(
-                margin: EdgeInsets.all(3),
-                height: MediaQuery.of(context).size.height,
-                child: doctor(drs))
-          ],
+        child: Column(
+          children: [filter(filters), doctor(drs)],
         ),
       ),
     );
@@ -107,120 +103,125 @@ class _BrowseState extends State<Browse> {
   }
 
   doctor(Map dr) {
-    return ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: dr.length,
-        itemBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10)),
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
-            height: MediaQuery.of(context).size.height/3,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                        height: 125.0,
-                        width: MediaQuery.of(context).size.width / 3.3,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(dr[index][1]),
-                            fit: BoxFit.fill,
+    return Flexible(
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: dr.length,
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              margin: EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
+              height: MediaQuery.of(context).size.height / dr.length,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                          height: 125.0,
+                          width: MediaQuery.of(context).size.width / 3.3,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: NetworkImage(dr[index][1]),
+                              fit: BoxFit.fill,
+                            ),
+                          )),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            dr[index][0],
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                height: 1.5),
                           ),
-                        )),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          dr[index][0],
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              height: 1.5),
-                        ),
-                        Text(
-                          'Dentist 🤣',
-                          style: TextStyle(
-                              color: Color(0xff00BBDC),
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              height: 1.5),
-                        ),
-                        Text(
-                          '⭐⭐⭐⭐[186 reviews]',
-                          style: TextStyle(
-                              color: Color(0xff18435A),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          '29 - Nov - 2020',
-                          style: TextStyle(
-                              color: Color(0xff00BBDC),
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              height: 1.5),
-                        ),
-                        Text(
-                          '\nAED 200',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                        height: MediaQuery.of(context).size.height / 11,
-                        width: MediaQuery.of(context).size.width / 1.20,
-                        child: wish(wishes))
-                  ],
-                )
-              ],
-            ),
-          );
-        });
+                          Text(
+                            'Dentist 🤣',
+                            style: TextStyle(
+                                color: Color(0xff00BBDC),
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                height: 1.5),
+                          ),
+                          Text(
+                            '⭐⭐⭐⭐[186 reviews]',
+                            style: TextStyle(
+                                color: Color(0xff18435A),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '29 - Nov - 2020',
+                            style: TextStyle(
+                                color: Color(0xff00BBDC),
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                height: 1.5),
+                          ),
+                          Text(
+                            '\nAED 200',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                          height: MediaQuery.of(context).size.height / 11,
+                          width: MediaQuery.of(context).size.width / 1.20,
+                          child: wish(wishes))
+                    ],
+                  )
+                ],
+              ),
+            );
+          }),
+    );
   }
 
   wish(Map wish) {
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: wish.length,
-        itemBuilder: (context, index) {
-          return Container(
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.fromLTRB(5, 15, 0, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  wish[index][0],
-                  color: Colors.cyan,
-                  size: 35,
-                ),
-                SizedBox(width: 15),
-                Text(
-                  wish[index][1],
-                  style: TextStyle(
-                      color: Colors.cyan,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-              ],
-            ),
-          );
-        });
+    return Container(
+      height: double.infinity,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: wish.length,
+          itemBuilder: (context, index) {
+            return Container(
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.fromLTRB(5, 15, 0, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    wish[index][0],
+                    color: Colors.cyan,
+                    size: 35,
+                  ),
+                  SizedBox(width: 15),
+                  Text(
+                    wish[index][1],
+                    style: TextStyle(
+                        color: Colors.cyan,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                ],
+              ),
+            );
+          }),
+    );
   }
 }
