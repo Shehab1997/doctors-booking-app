@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'file:///C:/Users/win10/AndroidStudioProjects/flutter_app_itshare/lib/Screens/home.dart';
 import 'file:///C:/Users/win10/AndroidStudioProjects/flutter_app_itshare/lib/Screens/profile.dart';
 import 'package:flutter_app_itshare/Screens/bottomnavbar.dart';
-import 'package:flutter_app_itshare/Screens/browse.dart';
+import 'package:flutter_app_itshare/Screens/signIn.dart';
 
 main() {
   runApp(Myapp());
@@ -18,7 +18,7 @@ class _MyappState extends State<Myapp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BottomNavBar(),
+      home: SignIn(),
       debugShowCheckedModeBanner: false,
     );
   }
