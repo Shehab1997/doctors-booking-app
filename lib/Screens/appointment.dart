@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_itshare/Screens/browse.dart';
 import 'package:flutter_app_itshare/Widgets/customappbar.dart';
+import 'package:flutter_app_itshare/Widgets/doctors.dart';
 
 class Appointments extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _AppointmentsState extends State<Appointments> {
                   MediaQuery.of(context).size.height / 5.5,
                   'Manage Your Appointment',
                   TabBar(
-                    tabs: [Text('shehab'), Text('ahmed')],
+                    tabs: [Text('Previous'), Text('Upcoming')],
                     labelColor: Colors.white,
                     labelStyle: TextStyle(
                         color: Colors.white,
@@ -133,8 +134,54 @@ class Upcoming extends StatefulWidget {
 }
 
 class _UpcomingState extends State<Upcoming> {
+  Map<int, List> upcomingAppointments = {
+    0: [
+      "Dr. Ahmed Saber",
+      "Dental",
+      "Date: 20-Apr-2021",
+      "Time: 06:30 PM",
+      "https://pulse.doctor/media_/images/photos/doctor4.jpg"
+    ],
+    1: [
+      "Dr. Ahmed Ali",
+      "Cardio",
+      "Date: 25-Apr-2021",
+      "Time: 08:30 PM",
+      "https://www.pinnaclecare.com/wp-content/uploads/2017/12/bigstock-African-young-doctor-portrait-28825394-300x425.jpg"
+    ],
+    2: [
+      "Dr. Adel Hamed",
+      "General",
+      "Date: 10-Apr-2021",
+      "Time: 03:30 PM",
+      "https://s3-eu-west-1.amazonaws.com/intercare-web-public/wysiwyg-uploads%2F1569586526901-doctor.jpg"
+    ],
+    3: [
+      "Dr. Samia Omar",
+      "Therapy",
+      "Date: 10-Apr-2021",
+      "Time: 10:00 PM",
+      "https://image.freepik.com/free-photo/beautiful-young-female-doctor-looking-camera-office_1301-7807.jpg"
+    ],
+  };
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      margin: EdgeInsets.all(10.0),
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: upcomingAppointments.length,
+        itemBuilder: (context, index) {
+          return Doctors(
+            doctorName: upcomingAppointments[index]![0],
+            type: upcomingAppointments[index]![1],
+            date: upcomingAppointments[index]![2],
+            time: upcomingAppointments[index]![3],
+            image: upcomingAppointments[index]![4],
+            className: "Upcoming",
+          );
+        },
+      ),
+    );
   }
 }

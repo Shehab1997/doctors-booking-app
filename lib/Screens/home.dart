@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_itshare/Screens/browse.dart';
-import 'package:flutter_app_itshare/Screens/profile.dart';
-import 'package:flutter_app_itshare/Screens/appointment.dart';
 import 'package:flutter_app_itshare/Widgets/customappbar.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_app_itshare/Models/categories/categoryController.dart';
+import 'package:flutter_app_itshare/Models/categories/categoryModel.dart';
+import 'package:flutter_app_itshare/Widgets/loading.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,49 +13,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Map<int, List> offers = {
-    0: [
-      '25% Off',
-      'https://img.freepik.com/free-vector/discount-concept-illustration_114360-1852.jpg?size=626&ext=jpg'
-    ],
-    1: [
-      '50% Off',
-      'https://image.freepik.com/free-vector/discount-loyalty-card-loyalty-program-customer-service-rewards-card-points-concept-isolated-concept-illustration-with-tiny-people-floral-elements-hero-image-website_126608-770.jpg'
-    ],
-    2: [
-      'up to 75%',
-      'https://image.freepik.com/free-vector/people-celebrating-with-gift-card-voucher-isolated-flat-vector-illustration-cartoon-happy-customers-winning-abstract-prize-certificate-discount-coupon-creative-strategy-camp-money_74855-8500.jpg'
-    ],
-    3: [
-      '10% off',
-      'https://image.freepik.com/free-vector/black-friday-shop-people-buying-super-discount-shop-online-service-promo-purchase-marketing-illustration_101179-927.jpg'
-    ],
-  };
-  Map<int, List> categories = {
-    0: [
-      'Dentists',
-      'https://image.freepik.com/free-vector/children-s-dentist-patient_42515-334.jpg'
-    ],
-    1: [
-      'General',
-      'https://cdn.pixabay.com/photo/2020/12/09/16/41/stethoscope-5817919_1280.png'
-    ],
-    2: [
-      'Cardioilogist',
-      'https://www.shareicon.net/data/512x512/2017/03/27/881663_medical_512x512.png'
-    ],
-    3: [
-      'Kids',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJQtnoIW8DcWTBL-C9vMA3CQOMUxQA1GEbtA&usqp=CAU'
-    ],
-    4: [
-      'Covid19',
-      'https://image.freepik.com/free-vector/flat-illustration-vaccines-liquid-medicines-patients-hospitals-public-health-design-healthcare_4968-1231.jpg'
-    ],
-  };
+
+@override
+  void initState() {
+  Provider.of<CategoryController>(context,listen: false).getCategories();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var listen=Provider.of<CategoryController>(context,listen: true);
+    var notListen=Provider.of<CategoryController>(context,listen: false);
     return Scaffold(
         backgroundColor: Colors.grey[50],
         body: Container(
@@ -104,12 +74,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                   margin: EdgeInsets.all(10),
                   height: MediaQuery.of(context).size.height / 4.10,
-                  child: scrollSection(categories)),
-              headline('Today Offers'),
-              Container(
-                  margin: EdgeInsets.all(10),
-                  height: MediaQuery.of(context).size.height / 4.10,
-                  child: scrollSection(offers)),
+                  child: listen.allCategories.isEmpty? Loading(): scrollSection(notListen.allCategories)),
               headline('Suggested Doctors'),
               doctorSuggestions('Shehab Ahmed', 'Dental'),
               doctorSuggestions('Basel Allam', 'Kids'),
@@ -122,7 +87,7 @@ class _HomePageState extends State<HomePage> {
   headline(String title) {
     return ListTile(
       onTap: () {
-        return Navigator.push(context, MaterialPageRoute(builder: (_) {
+         Navigator.push(context, MaterialPageRoute(builder: (_) {
           return (title == 'Categories'
               ? Browse()
               : Container(
@@ -141,10 +106,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  scrollSection(Map map) {
+  scrollSection(List<CategoryModel> pro) {
     return ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: map.length,
+        itemCount: pro.length,
         itemBuilder: (context, index) {
           return Container(
               width: MediaQuery.of(context).size.width / 2.5,
@@ -152,13 +117,13 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                      image: NetworkImage(map[index][1]),
+                      image: NetworkImage(pro[index].categoryImage),
                       fit: BoxFit.fill,
                       colorFilter:
                           ColorFilter.mode(Colors.black38, BlendMode.color))),
               alignment: Alignment.center,
               child: Text(
-                map[index][0],
+                pro[index].categoryName,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,

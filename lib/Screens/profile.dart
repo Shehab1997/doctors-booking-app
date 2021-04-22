@@ -23,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Container(
                 child: ListTile(
                   onTap: () {
-                    return Navigator.push(context,
+                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) {
                       return BottomNavBar();
                     }));
